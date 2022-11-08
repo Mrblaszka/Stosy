@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import java.util.LinkedList
+import java.util.Queue
 import java.util.Stack
 
 class MainActivity : AppCompatActivity() {
@@ -58,6 +59,15 @@ class MainActivity : AppCompatActivity() {
             if (!stos.isEmpty()) {
                 text2.text = "Pierwszy element" + stos.first().toString()
             }
+        }
+
+        //Kolejka
+        val zmiana = findViewById<Button>(R.id.kolejka)
+        val kolejka: Queue<Int>  = LinkedList<Int>()
+        zmiana.setOnClickListener {
+            first.text = "Pierwszy element"
+            last.text = "Wszystkie"
+
         }
     }
 }
