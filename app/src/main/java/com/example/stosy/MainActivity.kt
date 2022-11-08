@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // Mateusz Blacha 3Pr
+        val title = findViewById<TextView>(R.id.title)
         var text1 = findViewById<EditText>(R.id.txt)
         val add = findViewById<Button>(R.id.bt1_st)
         val del = findViewById<Button>(R.id.bt1_st2)
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         val first = findViewById<TextView>(R.id.bt1_st3)
         val last = findViewById<TextView>(R.id.bt1_st4)
         val stos = Stack<Int>()
+        val last2 = findViewById<Button>(R.id.bt1_st6)
         text2.text = ""
 
 
@@ -46,28 +48,73 @@ class MainActivity : AppCompatActivity() {
         }
 
         del.setOnClickListener {
-            stos.pop()
-            text2.text = stos.toString()
+            val ele = stos.removeLast()
+            text2.text = ele.toString()
         }
 
         last.setOnClickListener {
             if (!stos.isEmpty()) {
-                text2.text = "Ostatni element" + stos.last().toString()
+                text2.text = "Ostatni element: " + stos.last().toString()
             }
         }
         first.setOnClickListener {
             if (!stos.isEmpty()) {
-                text2.text = "Pierwszy element" + stos.first().toString()
+                text2.text = "Pierwszy element: " + stos.first().toString()
+            }
+        }
+        last.setOnClickListener {
+            if(!stos.isEmpty()){
+                text2.text = "Wszystkie: " + stos.toString()
             }
         }
 
+
         //Kolejka
+
         val zmiana = findViewById<Button>(R.id.kolejka)
         val kolejka: Queue<Int>  = LinkedList<Int>()
         zmiana.setOnClickListener {
-            first.text = "Pierwszy element"
-            last.text = "Wszystkie"
+            text2.text = ""
+            text1.text.clear()
+            zmiana.text = "Użyj stosu"
+            title.text = "Lista"
 
+            zmiana.setOnClickListener {
+                title.text = "STOS"
+            }
+        }
+        add.setOnClickListener {
+            if (text2.toString() != "") {
+                kolejka.add(text1.text.toString().toInt())
+                text2.text = kolejka.toString()
+            }
+        }
+
+        del.setOnClickListener {
+            if (text2.toString() != "") {
+                val ele2 = kolejka.poll()
+                text2.text = "Usunięty element: " + ele2.toString()
+            }
+        }
+        first.setOnClickListener {
+            if(text2.toString() != ""){
+                val pierwszy = kolejka.first().toString()
+                text2.text = "Pierwszy element: " + pierwszy
+            }
+        }
+        last2.setOnClickListener {
+            if(text2.toString() != ""){
+                text2.text = "Wszystkie elementy: " + kolejka.toString()
+            }
+        }
+        last.setOnClickListener {
+            if(text2.toString() != ""){
+                val ostatni2 = kolejka.last().toString()
+                text2.text = "Ostatni element" + ostatni2
+            }
         }
     }
+
+
+
 }
